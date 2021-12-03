@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wl,--enable-auto-import CMakeFiles/msgslot.dir/main.c.o CMakeFiles/msgslot.dir/message_slot.c.o CMakeFiles/msgslot.dir/message_reader.c.o CMakeFiles/msgslot.dir/message_sender.c.o -o msgslot.exe -Wl,--out-implib,libmsgslot.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
