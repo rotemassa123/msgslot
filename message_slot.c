@@ -9,14 +9,8 @@
 
 #include "message_slot.h"
 
-#include <linux/dictionary.h>
-#include <linux/kernel.h>   /* We're doing kernel work */
-#include <linux/module.h>   /* Specifically, a module */
-#include <linux/fs.h>       /* for register_chrdev */
-#include <linux/uaccess.h>  /* for get_user and put_user */
-#include <linux/string.h>   /* for memset. NOTE - not string.h!*/
+
 #include <sys/types.h>
-#include <stdio.h>
 #include <stddef.h>
 
 MODULE_LICENSE("GPL");
@@ -85,7 +79,7 @@ static long device_ioctl( struct   file* file,
     {
         // Get the parameter given to ioctl by the process
         printk( "Invoking ioctl: setting channel to %d\n", ioctl_param );
-        file.private_data = ioctl_param;
+        file->private_data = ioctl_param;
     }
 
     return SUCCESS;
