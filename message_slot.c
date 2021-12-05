@@ -9,6 +9,7 @@
 
 #include "message_slot.h"
 
+#include <linux/dictionary.h>
 #include <linux/kernel.h>   /* We're doing kernel work */
 #include <linux/module.h>   /* Specifically, a module */
 #include <linux/fs.h>       /* for register_chrdev */
@@ -26,57 +27,24 @@ MODULE_LICENSE("GPL");
 #define DEVICE_FILE_NAME "simple_char_dev"
 #define IOCTL_SET_CHANNEL 7
 
-struct chardev_info
-{
-    spinlock_t lock;
-};
-
-// used to prevent concurent access into the same device
-static int dev_open_flag = 0;
-
-static struct chardev_info device_info;
-
 // The message the device will give when asked
 static char the_message[BUF_LEN];
 
 // device major number
 static int major = DEFAULT_MAJOR;
 
-//current channel
-unsigned long current_channel;
-
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode* inode,
                         struct file*  file )
 {
-    unsigned long flags; // for spinlock
-    printk("Invoking device_open(%p)\n", file);
-
-    // We don't want to talk to two processes at the same time
-    spin_lock_irqsave(&device_info.lock, flags);
-    if( 1 == dev_open_flag )
-    {
-        spin_unlock_irqrestore(&device_info.lock, flags);
-        return -EBUSY;
-    }
-
-    ++dev_open_flag;
-    spin_unlock_irqrestore(&device_info.lock, flags);
-    return SUCCESS;
+    //to be done
 }
 
 //---------------------------------------------------------------
 static int device_release( struct inode* inode,
                            struct file*  file)
 {
-    unsigned long flags; // for spinlock
-    printk("Invoking device_release(%p,%p)\n", inode, file);
-
-    // ready for our next caller
-    spin_lock_irqsave(&device_info.lock, flags);
-    --dev_open_flag;
-    spin_unlock_irqrestore(&device_info.lock, flags);
-    return SUCCESS;
+    //to be done
 }
 
 //---------------------------------------------------------------
@@ -117,7 +85,7 @@ static long device_ioctl( struct   file* file,
     {
         // Get the parameter given to ioctl by the process
         printk( "Invoking ioctl: setting channel to %d\n", ioctl_param );
-        current_channel = ioctl_param;
+        file.private_data = ioctl_param;
     }
 
     return SUCCESS;
