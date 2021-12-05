@@ -2,13 +2,12 @@
 // Created by user on 12/2/2021.
 //
 
-#ifndef MSGSLOT_MESSAGE_SLOT_H
-#define MSGSLOT_MESSAGE_SLOT_H
+#include <linux/kernel.h>   /* We're doing kernel work */
+#include <linux/module.h>   /* Specifically, a module */
+#include <linux/fs.h>       /* for register_chrdev */
+#include <linux/uaccess.h>  /* for get_user and put_user */
+#include <linux/string.h>   /* for memset. NOTE - not string.h!*/
 
+#define DEFAULT_MAJOR 240
 
-class message_slot{
-
-};
-
-
-#endif //MSGSLOT_MESSAGE_SLOT_H
+int
