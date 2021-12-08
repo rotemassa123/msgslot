@@ -25,16 +25,18 @@ MODULE_LICENSE("GPL");
 static int major = MAJOR_NUM;
 
 //all message slots
-static radix_tree_root message_slots[255];
+static struct radix_tree_root * message_slots[256];
+
 
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode* inode,
                         struct file*  file )
 {
     int minor = iminor(inode);
-    if (message_slots[minor] != NULL) {return SUCCESS};
+    if (message_slots[minor] != NULL) { return SUCCESS; }
 
-    INIT_RADIX_TREE(message_slots[minor], gfp_mask);
+    INIT_RADIX_TREE(message_slots[minor], gfp_allowed_mask);
+    //open device (however the fuck you do that)
 }
 
 //---------------------------------------------------------------

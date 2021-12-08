@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/c/Users/user/CLionProjects/msgslot/main.c" "/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/main.c.o"
-  "/cygdrive/c/Users/user/CLionProjects/msgslot/message_reader.c" "/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_reader.c.o"
-  "/cygdrive/c/Users/user/CLionProjects/msgslot/message_sender.c" "/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_sender.c.o"
-  "/cygdrive/c/Users/user/CLionProjects/msgslot/message_slot.c" "/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_slot.c.o"
+  "/home/student/CLionProjects/msgslot/main.c" "/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/main.c.o"
+  "/home/student/CLionProjects/msgslot/message_reader.c" "/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_reader.c.o"
+  "/home/student/CLionProjects/msgslot/message_sender.c" "/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_sender.c.o"
+  "/home/student/CLionProjects/msgslot/message_slot.c" "/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir/message_slot.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -3,8 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/msgslot.dir/message_reader.c.o"
   "CMakeFiles/msgslot.dir/message_sender.c.o"
   "CMakeFiles/msgslot.dir/message_slot.c.o"
-  "libmsgslot.dll.a"
-  "msgslot.exe"
+  "msgslot"
   "msgslot.pdb"
 )
 
