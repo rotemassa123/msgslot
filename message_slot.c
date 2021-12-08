@@ -54,21 +54,32 @@ static int device_release( struct inode* inode, struct file*  file)
 static ssize_t device_read( struct file* file, char __user* buffer, size_t length )
     {
     unsigned int minor = iminor(file->f_inode);
+    void * channel = file->private_data;
+    char * msg = radix_tree_lookup(message_slots[minor], (unsigned long) &channel);
+    int i;
 
-    //invalid argument error
-    return -EINVAL;
+    for( i = 0; i < length ; ++i )
+        put_user(msg[i], &buffer[i]);
+
+    return SUCCESS;
 }
 
 //---------------------------------------------------------------
 // a processs which has already opened
 // the device file attempts to write to it
-static ssize_t device_write( struct file* file, const char __user* buffer, unsigned long channel, int length, loff_t* offset)
+static ssize_t device_write( struct file* file, const char __user* buffer, unsigned long channel, int length)
 {
+    unsigned int minor = iminor(file->f_inode);
+    radix_tree_delete(message_slots[minor], channel);
+    char * channel_msg = kcalloc(length, sizeof(char), GFP_KERNEL);
     int i;
-    printk("Invoking device_write(%p,%ld)\n", file, length);
-    for( i = 0; i < length && i < BUF_LEN; ++i )
-    {
-    get_user(the_message[i], &buffer[i]);
+
+    for( i = 0; i < length ; ++i )
+        get_user(&buffer[i], channel_msg[i]);
+
+    radix_tree_insert(message_slots[minor], channel, channel_msg);
+
+    return SUCCESS;
 }
 
 // return the number of input characters used
