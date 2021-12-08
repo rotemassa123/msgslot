@@ -15,6 +15,8 @@
 #include <linux/uaccess.h>  /* for get_user and put_user */
 #include <linux/string.h>   /* for memset. NOTE - not string.h!*/
 #include <linux/radix-tree.h>
+#include <linux/slab.h>
+#include <linux/errno.h>
 
 #include <sys/types.h>
 #include <stddef.h>
@@ -36,6 +38,7 @@ static int device_open( struct inode* inode,
     //file->f_inode = inode;
     if (message_slots[minor] != NULL) { return SUCCESS; }
 
+    message_slots[minor] = kmalloc(sizeof(struct radix_tree_root *), GFP_KERNEL);
     INIT_RADIX_TREE(message_slots[minor], gfp_allowed_mask);
 }
 
@@ -99,7 +102,6 @@ struct file_operations Fops =
 // Initialize the module - Register the character device
 static int __init _init(void)
 {
-
     // init dev struct
     memset( &device_info, 0, sizeof(struct chardev_info) );
     spin_lock_init( &device_info.lock );
@@ -137,9 +139,9 @@ static void __exit simple_cleanup(void)
 
     for(i = 0; i < 256; i++){
         radix_tree_for_each_slot(slot, message_slots[i], iter, 0){
-            kf
+            kfree(slot);
         }
-
+        kfree(message_slots[i]);
     }
     unregister_chrdev(major, DEVICE_RANGE_NAME);
 }
