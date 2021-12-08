@@ -20,9 +20,4 @@
 #define SUCCESS 0
 #define IOCTL_SET_CHANNEL 7
 
-struct message_slot{
-    char * device_name;
-
-};
-
 #endif

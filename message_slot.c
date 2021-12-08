@@ -14,25 +14,27 @@
 #include <linux/fs.h>       /* for register_chrdev */
 #include <linux/uaccess.h>  /* for get_user and put_user */
 #include <linux/string.h>   /* for memset. NOTE - not string.h!*/
+#include <linux/radix-tree.h>
 
 #include <sys/types.h>
 #include <stddef.h>
 
 MODULE_LICENSE("GPL");
 
-// The message the device will give when asked
-static char the_message[BUF_LEN];
-
 // device major number
 static int major = MAJOR_NUM;
 
-
+//all message slots
+static radix_tree_root message_slots[255];
 
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode* inode,
                         struct file*  file )
 {
-    //to be done
+    int minor = iminor(inode);
+    if (message_slots[minor] != NULL) {return SUCCESS};
+
+    INIT_RADIX_TREE(message_slots[minor], gfp_mask);
 }
 
 //---------------------------------------------------------------
@@ -75,14 +77,7 @@ static long device_ioctl( struct   file* file,
                           unsigned int   ioctl_command_id,
                           unsigned long  ioctl_param )
 {
-    // Switch according to the ioctl called
-    if( IOCTL_SET_CHANNEL == ioctl_command_id )
-    {
-        // Get the parameter given to ioctl by the process
-        printk( "Invoking ioctl: setting channel to %d\n", ioctl_param );
-        file->private_data = ioctl_param;
-    }
-
+    file->private_data = IOCTL_SET_CHANNEL == ioctl_command_id ? ioctl_param : -1;
     return SUCCESS;
 }
 
@@ -103,8 +98,9 @@ struct file_operations Fops =
 
 //---------------------------------------------------------------
 // Initialize the module - Register the character device
-static int __init simple_init(void)
+static int __init _init(void)
 {
+
     // init dev struct
     memset( &device_info, 0, sizeof(struct chardev_info) );
     spin_lock_init( &device_info.lock );
@@ -135,8 +131,7 @@ static int __init simple_init(void)
 //---------------------------------------------------------------
 static void __exit simple_cleanup(void)
 {
-    // Unregister the device
-    // Should always succeed
+    //free all memory
     unregister_chrdev(major, DEVICE_RANGE_NAME);
 }
 
