@@ -1,3 +1,3 @@
-/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/edit_cache.dir
-/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir
+/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/student/CLionProjects/msgslot/cmake-build-debug/CMakeFiles/msgslot.dir

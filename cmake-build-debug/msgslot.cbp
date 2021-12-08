@@ -8,90 +8,94 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug"/>
+				<Option working_dir="/home/student/CLionProjects/msgslot/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug"/>
+				<Option working_dir="/home/student/CLionProjects/msgslot/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug"/>
+				<Option working_dir="/home/student/CLionProjects/msgslot/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="msgslot">
-				<Option output="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/msgslot.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug"/>
+				<Option output="/home/student/CLionProjects/msgslot/cmake-build-debug/msgslot" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/CLionProjects/msgslot/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/src/linux-headers-5.0.0-32/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 msgslot"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 msgslot"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="msgslot/fast">
-				<Option output="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/msgslot.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug"/>
+				<Option output="/home/student/CLionProjects/msgslot/cmake-build-debug/msgslot" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/CLionProjects/msgslot/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/src/linux-headers-5.0.0-32/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 msgslot/fast"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/user/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 msgslot/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/student/CLionProjects/msgslot/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/main.c">
+		<Unit filename="/home/student/CLionProjects/msgslot/main.c">
 			<Option target="msgslot"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/message_reader.c">
+		<Unit filename="/home/student/CLionProjects/msgslot/message_reader.c">
 			<Option target="msgslot"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/message_sender.c">
+		<Unit filename="/home/student/CLionProjects/msgslot/message_sender.c">
 			<Option target="msgslot"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/message_slot.c">
+		<Unit filename="/home/student/CLionProjects/msgslot/message_slot.c">
 			<Option target="msgslot"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/message_slot.h">
+		<Unit filename="/home/student/CLionProjects/msgslot/message_slot.h">
 			<Option target="msgslot"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/user/CLionProjects/msgslot/CMakeLists.txt">
+		<Unit filename="/home/student/CLionProjects/msgslot/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
