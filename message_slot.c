@@ -9,6 +9,11 @@
 
 #include "message_slot.h"
 
+#include <linux/kernel.h>   /* We're doing kernel work */
+#include <linux/module.h>   /* Specifically, a module */
+#include <linux/fs.h>       /* for register_chrdev */
+#include <linux/uaccess.h>  /* for get_user and put_user */
+#include <linux/string.h>   /* for memset. NOTE - not string.h!*/
 
 #include <sys/types.h>
 #include <stddef.h>
