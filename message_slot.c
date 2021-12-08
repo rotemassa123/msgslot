@@ -32,28 +32,25 @@ static struct radix_tree_root * message_slots[256];
 static int device_open( struct inode* inode,
                         struct file*  file )
 {
-    int minor = iminor(inode);
+    unsigned int minor = iminor(inode);
+    //file->f_inode = inode;
     if (message_slots[minor] != NULL) { return SUCCESS; }
 
     INIT_RADIX_TREE(message_slots[minor], gfp_allowed_mask);
-    //open device (however the fuck you do that)
 }
 
 //---------------------------------------------------------------
-static int device_release( struct inode* inode,
-                           struct file*  file)
+static int device_release( struct inode* inode, struct file*  file)
 {
-    //to be done
+
 }
 
 //---------------------------------------------------------------
 // a process which has already opened
 // the device file attempts to read from it
-static ssize_t device_read( struct file* file, char __user* buffer, size_t length, loff_t* offset )
+static ssize_t device_read( struct file* file, char __user* buffer, size_t length )
     {
-    // read doesnt really do anything (for now)
-    printk( "Invocing device_read(%p,%ld) - " "operation not supported yet\n" "(last written - %s)\n",
-        file, length, the_message );
+    unsigned int minor = iminor(file->f_inode);
 
     //invalid argument error
     return -EINVAL;
@@ -79,7 +76,7 @@ static long device_ioctl( struct   file* file,
                           unsigned int   ioctl_command_id,
                           unsigned long  ioctl_param )
 {
-    file->private_data = IOCTL_SET_CHANNEL == ioctl_command_id ? ioctl_param : -1;
+    file->private_data = IOCTL_SET_CHANNEL == ioctl_command_id ? &ioctl_param : NULL;
     return SUCCESS;
 }
 
@@ -134,6 +131,16 @@ static int __init _init(void)
 static void __exit simple_cleanup(void)
 {
     //free all memory
+    int i;
+    void** slot;
+    struct radix_tree_iter *iter;
+
+    for(i = 0; i < 256; i++){
+        radix_tree_for_each_slot(slot, message_slots[i], iter, 0){
+            kf
+        }
+
+    }
     unregister_chrdev(major, DEVICE_RANGE_NAME);
 }
 
