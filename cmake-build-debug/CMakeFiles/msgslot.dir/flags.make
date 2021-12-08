@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/usr/src/linux-headers-5.0.0-32/include
 
 C_FLAGS = -g -std=gnu99
 

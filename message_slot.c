@@ -15,17 +15,13 @@
 
 MODULE_LICENSE("GPL");
 
-#define SUCCESS 0
-#define DEVICE_RANGE_NAME "char_dev"
-#define BUF_LEN 80
-#define DEVICE_FILE_NAME "simple_char_dev"
-#define IOCTL_SET_CHANNEL 7
-
 // The message the device will give when asked
 static char the_message[BUF_LEN];
 
 // device major number
-static int major = DEFAULT_MAJOR;
+static int major = MAJOR_NUM;
+
+
 
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode* inode,
