@@ -20,4 +20,10 @@
 #define SUCCESS 0
 #define IOCTL_SET_CHANNEL 7
 
+typedef struct {
+    char * msg;
+    unsigned long length;
+    unsigned long number;
+}Channel;
+
 #endif
