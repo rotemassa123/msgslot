@@ -8,7 +8,7 @@
 #define IOCTL_COMMAND_ID 8
 
 int main(int argc, char *argv[]){
-    int fd, channel_number, i;
+    int fd, channel_number;
 
     if(argc != 4){ perror("wrong amout of arguments"); exit(1); }
 

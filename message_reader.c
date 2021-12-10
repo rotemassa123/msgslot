@@ -8,7 +8,7 @@
 
 
 int main(int argc, char *argv[]){
-    int fd, channel_number;
+    int fd, channel_number, msg_len;
     char buf[128];
 
     if(argc != 3){ perror("wrong amout of arguments"); exit(1); }
@@ -18,8 +18,8 @@ int main(int argc, char *argv[]){
     channel_number = atoi(argv[2]);
 
     ioctl( fd, IOCTL_COMMAND_ID, channel_number);
-    if(read(fd, buf, 128) < 0) { perror("reading failed"); }
-    write(1, buf, )
+    if((msg_len = read(fd, buf, 128)) < 0) { perror("reading failed"); }
+    if(write(1, buf, msg_len) < 0) { perror("writing failed"); }
 
     if(close(fd) < 0) { perror("error closinggg"); };
     return 0;
