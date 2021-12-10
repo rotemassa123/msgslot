@@ -138,15 +138,19 @@ struct file_operations Fops =
 // Initialize the module - Register the character device
 static int __init _init_module(void)
 {
+    int err;
+
+    printk("__init_module: registering chrdev");
     // Register driver capabilities. Obtain major num
-    major = register_chrdev( 0, DEVICE_RANGE_NAME, &Fops );
+    err = register_chrdev( major, DEVICE_RANGE_NAME, &Fops );
+    printk("__init_module: finished registering chrdev");
 
     // Negative values signify an error
-    if( major < 0 )
+    if( err < 0 )
     {
         printk( KERN_ALERT "%s registraion failed for  %d\n",
-                DEVICE_FILE_NAME, major );
-        return major;
+                DEVICE_FILE_NAME, err );
+        return err;
     }
     return SUCCESS;
 }
@@ -160,16 +164,19 @@ static void __exit _exit_module(void)
     struct radix_tree_iter iter;
     Channel *channel;
 
+    unregister_chrdev(major, DEVICE_RANGE_NAME);
 
     for(i = 0; i < 256; i++){
-        radix_tree_for_each_slot(slot, message_slots[i], &iter, 0){
-            channel = radix_tree_deref_slot(slot);
-            kfree(channel->msg);
-            radix_tree_delete(message_slots[i], channel->number);
+        if(message_slots[i] != NULL){
+            radix_tree_for_each_slot(slot, message_slots[i], &iter, 0){
+                channel = radix_tree_deref_slot(slot);
+                kfree(channel->msg);
+                radix_tree_delete(message_slots[i], channel->number);
+            }
+            kfree(message_slots[i]);
         }
-        kfree(message_slots[i]);
     }
-    unregister_chrdev(major, DEVICE_RANGE_NAME);
+
 }
 
 //---------------------------------------------------------------

@@ -8,9 +8,7 @@
 
 // Set the message of the device driver
 
-#define DEVICE_RANGE_NAME "char_dev"
-#define BUF_LEN 80
-#define DEVICE_FILE_NAME "simple_char_dev"
+#define DEVICE_RANGE_NAME "message_slot"
 #define SUCCESS 0
 #define IOCTL_SET_CHANNEL 8
 
