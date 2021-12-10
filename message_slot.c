@@ -28,7 +28,6 @@ static int major = MAJOR_NUM;
 //all message slots
 static struct radix_tree_root * message_slots[256];
 
-
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode* inode, struct file*  file )
 {
@@ -41,13 +40,18 @@ static int device_open( struct inode* inode, struct file*  file )
     if((message_slots[minor] = kmalloc(sizeof(struct radix_tree_root *), GFP_KERNEL)) == NULL) { return -ENOMEM; }
     INIT_RADIX_TREE(message_slots[minor], GFP_KERNEL);
 
+    printk("device open success!");
+
     return SUCCESS;
 }
 
 //---------------------------------------------------------------
 static int device_release( struct inode* inode, struct file*  file)
 {
-    return 0;
+    //Channel * channel;
+    //channel = (Channel *)file->private_data;
+    //kfree(channel);
+    return SUCCESS;
 }
 
 //---------------------------------------------------------------
@@ -57,22 +61,23 @@ static ssize_t device_read(struct file *file, char __user* buffer, size_t length
     {
     unsigned int minor;
     Channel *channel;
-    void * channel_number;
+    unsigned long channel_number;
     int i;
 
     printk("device_read is called...");
 
+
     minor = iminor(file->f_inode);
-    channel_number = file->private_data;
-    channel = radix_tree_lookup(message_slots[minor], (unsigned long) &channel_number);
+    channel_number = (unsigned int) (unsigned long) file->private_data;
+    if((channel = radix_tree_lookup(message_slots[minor], channel_number)) == NULL) { return -EINVAL; }
 
+    if(channel->length > length) { return -ENOSPC; }
+    printk("device_read: channel->msg is: %s", channel->msg);
 
-    if(channel->length < length) { return -ENOSPC; }
-
-    for( i = 0; i < length ; i++ )
+    for( i = 0; i < channel->length ; i++ )
         put_user(channel->msg[i], &buffer[i]);
 
-    return SUCCESS;
+    return channel->length;
 }
 
 //---------------------------------------------------------------
@@ -92,7 +97,7 @@ static ssize_t device_write(struct file *file, const char __user* buffer, size_t
     channel->length = length;
 
     if(file->private_data == NULL) { return -EINVAL; }
-    if((channel->number = (unsigned  long)&file->private_data) == 0) { return -EINVAL; }
+    if((channel->number = (unsigned int) (unsigned long) file->private_data) == 0) { return -EINVAL; }
 
 
     minor = iminor(file->f_inode);
@@ -103,7 +108,13 @@ static ssize_t device_write(struct file *file, const char __user* buffer, size_t
     for( i = 0; i < length ; ++i )
         get_user(channel->msg[i], &buffer[i]);
 
+    printk("message is: %s", channel->msg);
+
     radix_tree_insert(message_slots[minor], channel->number, channel);
+
+    printk("%s was inserted to minor %d on channel %lu", ((Channel *) radix_tree_lookup(message_slots[minor], channel->number))->msg, minor, channel->number);
+
+    printk("device write success!");
 
     return SUCCESS;
 }
@@ -115,7 +126,9 @@ static long device_ioctl( struct   file* file,
 {
     printk("device_ioctl is called...");
     if(ioctl_command_id != IOCTL_SET_CHANNEL) { return -EINVAL; }
-    file->private_data = IOCTL_SET_CHANNEL == ioctl_command_id ? &ioctl_param : NULL;
+    file->private_data = (void *) (unsigned long) ioctl_param;
+
+    printk("device ioctl success!");
     return SUCCESS;
 }
 
@@ -131,7 +144,6 @@ struct file_operations Fops =
                 .open           = device_open,
                 .unlocked_ioctl = device_ioctl,
                 .release        = device_release,
-
         };
 
 //---------------------------------------------------------------
@@ -149,7 +161,7 @@ static int __init _init_module(void)
     if( err < 0 )
     {
         printk( KERN_ALERT "%s registraion failed for  %d\n",
-                DEVICE_FILE_NAME, err );
+                DEVICE_RANGE_NAME, err );
         return err;
     }
     return SUCCESS;
