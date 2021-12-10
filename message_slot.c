@@ -20,6 +20,7 @@
 #include <stddef.h>
 
 
+
 MODULE_LICENSE("GPL");
 
 // device major number
@@ -68,14 +69,19 @@ static ssize_t device_read(struct file *file, char __user* buffer, size_t length
 
 
     minor = iminor(file->f_inode);
+    if(file->private_data == NULL) { return -EINVAL; }
     channel_number = (unsigned int) (unsigned long) file->private_data;
-    if((channel = radix_tree_lookup(message_slots[minor], channel_number)) == NULL) { return -EINVAL; }
+    if((channel = radix_tree_lookup(message_slots[minor], channel_number)) == NULL) { return -EWOULDBLOCK; }
 
     if(channel->length > length) { return -ENOSPC; }
     printk("device_read: channel->msg is: %s", channel->msg);
 
+    if(channel->msg == NULL) { return -EWOULDBLOCK; }
+
     for( i = 0; i < channel->length ; i++ )
-        put_user(channel->msg[i], &buffer[i]);
+        if((put_user(channel->msg[i], &buffer[i])) != 0)
+            return -EFAULT;
+
 
     return channel->length;
 }
@@ -106,7 +112,8 @@ static ssize_t device_write(struct file *file, const char __user* buffer, size_t
 
 
     for( i = 0; i < length ; ++i )
-        get_user(channel->msg[i], &buffer[i]);
+        if((get_user(channel->msg[i], &buffer[i])) != 0)
+            return -EFAULT;
 
     printk("message is: %s", channel->msg);
 
@@ -116,7 +123,7 @@ static ssize_t device_write(struct file *file, const char __user* buffer, size_t
 
     printk("device write success!");
 
-    return SUCCESS;
+    return channel->length;
 }
 
 
@@ -125,7 +132,7 @@ static long device_ioctl( struct   file* file,
                           unsigned long  ioctl_param )
 {
     printk("device_ioctl is called...");
-    if(ioctl_command_id != IOCTL_SET_CHANNEL) { return -EINVAL; }
+    if(ioctl_command_id != MSG_SLOT_CHANNEL) { return -EINVAL; }
     file->private_data = (void *) (unsigned long) ioctl_param;
 
     printk("device ioctl success!");
