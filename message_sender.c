@@ -10,17 +10,14 @@
 int main(int argc, char *argv[]){
     int fd, channel_number, i;
 
-    if(argc != 4){ return -1; }
+    if(argc != 4){ perror("wrong amout of arguments"); exit(1); }
 
     if((fd = open(argv[1], O_RDWR)) < 0) { perror("could not open file"); }
     channel_number = atoi(argv[2]);
 
-    ioctl( fd, IOCTL_COMMAND_ID, channel_number);
+    ioctl(fd, IOCTL_COMMAND_ID, channel_number);
+    if(write(fd, argv[3], strlen(argv[3])) < 0) { perror("cannot write to device");}
 
-    for(i = 0; i < strlen(argv[3]) - 1; i++)
-        write(fd, &argv[3][i], 1);
-
-    close(fd);
-
-    return 0;
+    if(close(fd) < 0) { perror("cannot close"); }
+    exit(0);
 }
